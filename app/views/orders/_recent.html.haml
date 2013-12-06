@@ -1,0 +1,12 @@
+%h3
+  今日結算
+  = Order.sum(Order.recent(1.day.ago.utc))
+  %br
+  昨日結算
+  = Order.sum(Order.recent(2.day.ago.utc)) - Order.sum(Order.recent(1.day.ago.utc))
+  %br
+  週結算
+  = Order.sum(Order.recent(1.week.ago.utc))
+  %br
+  月結算
+  = Order.sum(Order.recent(1.month.ago.utc))

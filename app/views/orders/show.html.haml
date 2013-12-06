@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%h3 Original amount
+= @order.original_amount
+%h3 Actual amount
+= @order.actual_amount
+%h3 Role
+= @order.role
+%h3 Book List
+- @order.books.each do |book|
+  = book.name
+  = book.price
+  = book.sale_type
+  %br
+
+
+=link_to 'Back', orders_path

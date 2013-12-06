@@ -1,0 +1,168 @@
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$grayMediumLight: #eaeaea;
+
+/* universal */
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    padding-top: 60px;
+}
+
+section {
+    overflow: auto;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.center {
+    text-align: center;
+    h1 {
+        margin-bottom: 10px;
+    }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+}
+
+h1 {
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.2em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: $grayLight;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    padding-top: 9px;
+    font-weight: bold;
+    line-height: 1;
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+/* footer */
+
+footer {
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid $grayMediumLight;
+    color: $grayLight;
+    a {
+        color: $gray;
+        &:hover {
+            color: $grayDarker;
+        }
+    }
+    small {
+        float: left;
+    }
+    ul {
+        float: right;
+        list-style: none;
+        li {
+            float: left;
+            margin-left: 10px;
+        }
+    }
+}
+.btn.btn-primary.books {
+    color: white;
+}
+.btn.btn-large.books {
+    color: white;
+}
+
+
+
+.well {
+    $padding_size: 2px;
+    margin-top: 25px;
+    background-repeat:repeat;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    padding-top: $padding_size;
+    padding-left: $padding_size;
+    padding-right: $padding_size;
+    padding-bottom: $padding_size;
+    max-width:150px;
+
+}
+.dropdown{
+    margin-left: 1px;
+    padding-left: -20px;    
+    list-style-type: none;
+
+}
+.dropdown-toggle.active{
+    // color: blue;
+    margin-left: -20px;
+    padding-left: -20px;
+}
+a {
+  color: gray;
+}
+
+
+body { margin: 0px; padding: 0px; }
+#wrapper {
+position: relative;
+}
+#maintext{
+    margin-top: 105px;
+}
+
+.nav {
+    overflow:visible; /*Changed from auto*/
+}
+
+
+h2.center {
+    font-size: 2.8em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: #999;
+}
+
+
+.btn.btn-primary{
+    color: white;
+}
+

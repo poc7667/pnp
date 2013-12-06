@@ -1,0 +1,15 @@
+- if not books.blank?
+  - books.each do |book|
+    %tr{id: "book_id_#{book.id}"}
+      %td= book.id
+      %td= book.name
+      %td= book.isbn
+      %td= book.sn
+      %td= book.price
+      %td
+        = link_to 'Show', book
+        = link_to 'Edit', edit_book_path(book)
+        = link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }, remote: true
+- else
+  :javascript
+    alert("Not Found");

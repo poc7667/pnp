@@ -1,0 +1,5 @@
+$("#customer_div").hide();
+$("#loaded_customer_id").html('<%= j render(:partial=> 'load_customer', 
+    locals: { customer: session[:load_customer], points: @points },
+    :formats => :html) %>');
+$("#loaded_customer_id").show();

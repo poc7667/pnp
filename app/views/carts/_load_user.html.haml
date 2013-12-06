@@ -1,0 +1,6 @@
+#div
+  = customer.name
+  = customer.role
+  = customer.phone
+  = Date.parse(customer.expire_date).strftime("%Y-%m-%d")
+  = count_expire_time(customer.expire_date)

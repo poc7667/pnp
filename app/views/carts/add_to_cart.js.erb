@@ -1,0 +1,26 @@
+// alert('<%= j @discounted_price.to_s %>');
+
+
+<% if @book==nil %>
+    alert("Book not Exists")
+<% else %>
+    
+    $('#checkout_table').show();
+    $('#total_price_table').show()
+    $("#loaded_customer_id").show();
+    $("#carts").show();
+
+
+    $('#checkout_table tr:last').after('<%=j render partial: 'add_to_cart',
+    locals: { :book => @book, :user => @user, :discounted_price => @discounted_price },
+     :formats => :html  %>')
+
+    // Clear Form After add book
+    $("#add_item_to_cart").each(function() {
+      return this.reset();
+    });
+        
+    window.sum_book_price();
+
+
+<% end %>

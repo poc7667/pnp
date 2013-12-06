@@ -1,0 +1,12 @@
+- if not book.blank?  
+  %tr{id: "book_id_#{book.id}"}
+    %td= book.name
+    = hidden_field_tag "book_ids[]", book.id
+    %td.original_price= book.price
+    %td.discounted_price= discounted_price
+    %td= Book::TYPE_TITLE[book.sale_type.to_sym]
+    %td= button_tag "移除此書"
+
+- else
+  :javascript
+    alert("Not Found");

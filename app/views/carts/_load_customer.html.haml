@@ -1,0 +1,15 @@
+- if customer.name != "GUEST"
+  #div.customer
+    %h3
+      = customer.name | 
+      #{Customer::CUSTOMER_TITLE[customer.role.upcase.to_sym]}貴賓 
+    - unless Date.parse(customer.expire_date).past?
+      - if customer.role.upcase == :PLATINUM.to_s.upcase
+        %h4 到期日期 #{Date.parse(customer.expire_date).strftime("%Y-%m-%d")} 剩餘有效天數 #{count_expire_time(customer.expire_date)} 天
+    %h4 目前累積消費 #{points} 元
+    = hidden_field_tag "customer_id", customer.id
+    = link_to "詳細客戶資料", customer, |
+     :class=> "btn btn-primary btn-info", |
+     :target => '_blank'
+
+%p

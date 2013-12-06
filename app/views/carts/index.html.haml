@@ -1,0 +1,50 @@
+#current_amount  
+%h1 結帳系統
+
+
+%div#loaded_customer.customer{ style: 'display: none;' }
+/ %h2 載入會員資料
+/ for customer search
+= form_tag cart_search_customer_path, :method => :get, remote: true do
+  %p
+    = text_field_tag :customer_query, params[:customer_query], |
+     :placeholder => "輸入姓名或電話"
+    = submit_tag "搜尋會員"
+
+%div#customer_div{ style: 'display: none;' }
+
+/Show User Information
+%p
+%hr
+/add by sn
+= form_tag cart_add_item_path, :id=> 'add_item_to_cart', :method => :get, remote: true do
+  %p
+    = text_field_tag :query, params[:query], :placeholder => "Serial Number"
+    = text_field_tag :price, params[:price], :placeholder => "Price"
+    = submit_tag "新增書籍"
+
+
+%div
+  = form_tag cart_submit_order_path, :id=> 'submit_orders_for', :method => :get  do
+    #loaded_customer_id{ style: 'display: none;' }
+    = render 'total_price_in_cart'
+    #carts{ style: 'display: none;' }
+      %table#checkout_table.table{ style: 'display: none;' }
+        %tr
+          %th 書名
+          %th 原價
+          %th 折扣後
+          %th 種類
+          %th function
+      = submit_tag "新增訂單", :class=> "btn btn-primary "
+
+#search_div{ style: 'display: none;' }
+  %table#books_tbl.table
+    %tr
+      %th id
+      %th title
+      %th ISBN
+      %th sn
+      %th price
+      %th Functions
+

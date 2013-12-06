@@ -1,0 +1,24 @@
+
+<!-- https://github.com/matthewrobertson/ERB-Sublime-Snippets -->
+<%= simple_form_for(@book, :html => { :class => "form-horizontal", remote: true }) do |f| %>
+<!-- http://stackoverflow.com/questions/10776429/make-all-input-fields-on-the-same-line -->
+
+<% if @book.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+  <ul>
+    <% @book.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= f.input :name , label: "name" %>
+<%= f.input :isbn , label: "isbn".upcase, :as => :string %>
+<%= f.input :price , label: "fix price".upcase, :as => :string %>
+<%= f.input :sn , label: "sn".upcase, :as => :string %>
+<%= f.submit 'add one', :id=> 'add_book_btn', :class => "btn btn-primary books" %>
+
+<% end %> 
