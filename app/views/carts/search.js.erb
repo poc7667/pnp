@@ -1,0 +1,12 @@
+// juse append result to the div
+//$('#search_div').append("<%= escape_javascript( @results.inspect ) %>");
+
+// 如果要取代 div的內容,建議使用 html
+// render partal: '檔名(可以用 controller/erbfile , 或者直接 erbfile)'
+//:formats => :html 加與不加都可以
+// alert('hi')
+// alert('<%=j @results.inspect %>')
+
+
+$('#books_tbl tr:last').after('<%= j render(:partial=> 'find_book', 
+    locals: { books: @books }, :formats => :html) %>');

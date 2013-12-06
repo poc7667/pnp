@@ -1,0 +1,16 @@
+- if customer.total >= 1
+  - customer.each_hit_with_result do |hit, u|
+    = form_tag cart_load_customer_path, :method => :get, remote: true do
+      = hidden_field_tag :load_customer, u.id
+      = u.id
+      = u.name
+      = u.role
+      / = u.expire_date.strftime("%Y-%m-%d")
+      / = u.address
+      = submit_tag "load"
+
+    %br/
+
+- else
+  :javascript
+    alert("User Not Found");

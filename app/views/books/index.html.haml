@@ -1,0 +1,39 @@
+/ show form errors
+
+/ %p#msg_p
+/ #form_error.alert
+
+%h1 Add
+%ul
+  - @book.errors.full_messages.each do |msg|
+    %li= msg
+%h2
+  = link_to "HELP 使用說明", root_path(), :class => "btn btn-primary books"
+/ = render 'form'
+%p
+= form_tag book_search_path, :method => :get, remote: true do
+  %p
+    = text_field_tag :query, params[:query], :placeholder => "BKName, Author, ISBN"
+    = submit_tag "搜尋"
+
+- if @existed_books
+  = will_paginate @existed_books, :previous_label => '上頁', :next_label => '下頁',:page_links => true , :id => 'all_books_pagination'
+
+%table#found_books_table.table
+  %th id
+  %th title
+  %th ISBN
+  %th sn
+  %th price
+  %th author
+  %th sale_type
+  %th category
+  / %th release_date
+  / %th location
+  / %th comment
+
+  %th Functions
+
+  #books.books
+    = render @existed_books
+%br/

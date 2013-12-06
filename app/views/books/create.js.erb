@@ -1,0 +1,16 @@
+// $('#new_book').remove();
+// $('#new_book_link').show();
+
+$('#form_error').hide();
+
+<% if @book.persisted?	%>
+
+    alert("success");
+    $('#books_tbl tr:first').after('<%= j render(@book) %>');
+
+<% else %>
+
+    $('#form_error').show();
+    $('#form_error').text('<%= @book.errors.full_messages.to_sentence.capitalize %>').prepend('form')
+
+<% end %>

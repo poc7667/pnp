@@ -1,0 +1,16 @@
+= simple_form_for(@customer) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name, as: :string
+    = f.input :email, as: :email
+    = f.input :phone, as: :tel
+    = f.input :indoor_phone, as: :tel
+    = f.input :role, as: :select, |
+     :collection => Customer::ROLES, |
+      :selected => 1
+    / = f.input :expire_date, :input_html => { :value => 1.year.from_now, :class => 'uneditable-input' } , |
+    / disabled: true, as: :string
+    = f.input :address, as: :string
+    = f.input :comment, :input_html => { :cols => 50, :rows => 3 }
+  .form-actions
+    = f.button :submit

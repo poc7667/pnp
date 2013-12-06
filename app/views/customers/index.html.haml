@@ -1,0 +1,43 @@
+- if @customers
+
+  %p
+  %div.center
+    = link_to "新增客戶資料", new_customer_path, |
+     :class=> "btn btn-primary btn-xlarge"
+
+    = will_paginate @customers, |
+     :previous_label => '上頁', | 
+     :next_label => '下頁',:page_links => true , |
+     :id => 'all_customers_pagination'
+
+  %h2.center 客戶總表
+
+  %table#rf_tbl.table.table-condensed.table-striped
+
+    %tr
+      %th Name
+      / %th Email
+      %th Phone
+      / %th Indoor phone
+      %th Role
+      %th Expire date
+      %th Address
+      / %th Comment
+      %th
+      %th
+      %th
+    - @customers.each do |customer|
+      %tr
+        %td= customer.name
+        / %td= customer.email
+        %td= customer.phone
+        / %td= customer.indoor_phone
+        %td= customer.role
+        %td= customer.expire_date
+        %td= customer.address
+        / %td= customer.comment
+        %td= link_to 'Show', customer
+        %td= link_to 'Edit', edit_customer_path(customer)
+        %td= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
+  = link_to 'New Customer', new_customer_path

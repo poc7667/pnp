@@ -1,0 +1,5 @@
+// http://stackoverflow.com/questions/370013/jquery-delete-all-table-rows-except-first
+$("#all_books_pagination").hide();
+$("#found_books_table").find("tr:gt(0)").remove();
+$('#found_books_table tr:last').after('<%= j render(:partial=> 'found_books', 
+    locals: { books: @existed_books }, :formats => :html) %>');

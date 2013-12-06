@@ -1,0 +1,51 @@
+/ = render 'recent'
+
+- show_recent_ten_days.each do | day |
+  = day
+  = Order.by_day_branch(day, 0)
+  = Order.by_day_branch(day, 1)
+  %br/
+
+%h1 Listing orders
+
+
+= simple_form_for :order, :url => '/orders' do |f|
+  = f.input :date, :placeholder => "訂單日期", |
+    :input_html=>{ :data =>{ :behaviour=>"datepicker"}}
+
+/ = form_tag root_path, :method => :get, remote: true do
+
+
+- if @orders
+  = will_paginate @orders, |
+    :previous_label => '上頁', |
+    :next_label => '下頁', |
+    :page_links => true , |
+    :id => 'all_orders_pagination'
+
+%table.table.table-striped
+  %tr
+    / %th Sn
+    %th Date
+    %th 負責
+    / %th Book
+    %th Original amount
+    %th Actual amount
+    %th Buyer
+    %th Role
+    %th 詳細資訊
+    / %th
+    / %th
+  - @orders.each do |order|
+    %tr
+      / %td= order.sn
+      %td= order.created_at.strftime("%Y-%m-%d %H:%M")
+      %td= get_user_name(order.user_id)
+      %td= order.original_amount
+      %td= order.actual_amount
+      %td= get_customer_name(order.customer_id)      
+      %td= order.role
+      %td= link_to 'Show', order
+      / %td= link_to 'Edit', edit_order_path(order)
+      / %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+%br/

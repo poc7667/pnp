@@ -1,0 +1,19 @@
+// juse append result to the div
+//$('#search_div').append("<%= escape_javascript( @results.inspect ) %>");
+
+// 如果要取代 div的內容,建議使用 html
+// render partal: '檔名(可以用 controller/erbfile , 或者直接 erbfile)'
+//:formats => :html 加與不加都可以
+// alert('hi')
+// alert('<%=j @results.inspect %>')
+$("#customer_div").show();
+$('#customer_div').html('<%= j render(:partial=> 'found_customer', 
+    locals: { customer: @customer }, :formats => :html) %>');
+
+// clean previous search
+$("#total_price_table").hide();
+$("#checkout_table tr:gt(0)").detach();
+$("#checkout_table").hide();
+$("#carts").hide();
+
+
