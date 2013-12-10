@@ -80,13 +80,12 @@ class CartsController < ApplicationController
 
   def add_item
 
-    session[:load_customer] ||= Customer.get_guest # 他剛好是general 就是他了阿
+    session[:load_customer] ||= Customer.get_guest # 他剛好是 general 就是他了阿
     @current_customer = session[:load_customer]
     session[:loaded_books] ||= []
 
     if params[:query].length > 0
       @book = Book.search_by_sn(params[:query])[0]
-
     else # not in database
       @book = generate_nonexisted_book(params[:price])
     end
