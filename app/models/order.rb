@@ -22,6 +22,11 @@ class Order < ActiveRecord::Base
     PLATINUM: 20000
   }
 
+  #
+  scope :available, -> { where(order_id: nil).order('created_at DESC') }
+  scope :not_available, where("order_id IS NOT NULL ")
+
+
   def self.recent(before_that_time)
    @recent_orders = self.where("created_at >= ?", before_that_time)
   end
@@ -37,9 +42,7 @@ class Order < ActiveRecord::Base
       order.user.branch_id == branch
     }
     ap orders_by_branch.count
-
-    binding.pry
-
+    return orders_by_branch
   end
 
   def self.sum(orders)

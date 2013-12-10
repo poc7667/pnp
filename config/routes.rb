@@ -25,6 +25,9 @@ BookStore::Application.routes.draw do
   get "cart/add_item" => "carts#add_item"
   get "cart/load_customer" => "carts#load_customer"
   get "cart/submit_order" => "carts#submit_order"
+  
+
+  post "order/show_by_date" => "orders#show_by_date"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

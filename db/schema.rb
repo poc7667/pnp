@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202072448) do
+ActiveRecord::Schema.define(:version => 20131202052512) do
 
   create_table "books", :force => true do |t|
     t.integer  "price"
@@ -63,17 +63,6 @@ ActiveRecord::Schema.define(:version => 20131202072448) do
     t.integer  "order_id"
   end
 
-  create_table "nd_multi_langs", :force => true do |t|
-    t.text     "model"
-    t.text     "version"
-    t.text     "result_file"
-    t.text     "user_id"
-    t.text     "excel"
-    t.text     "xml"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "orders", :force => true do |t|
     t.integer  "sn"
     t.integer  "original_amount"
@@ -107,22 +96,22 @@ ActiveRecord::Schema.define(:version => 20131202072448) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
+    t.text     "email",                  :default => "", :null => false
+    t.text     "encrypted_password",     :default => "", :null => false
+    t.text     "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.text     "current_sign_in_ip"
+    t.text     "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "confirmation_token"
+    t.text     "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "role"
+    t.text     "role"
     t.text     "phone"
     t.text     "indoor_phone"
     t.datetime "expire_date"

@@ -6,14 +6,23 @@
   = Order.by_day_branch(day, 1)
   %br/
 
-%h1 Listing orders
 
+%h2 Search
+= simple_form_for :order, :url => '/order/show_by_date' do |f|
 
-= simple_form_for :order, :url => '/orders' do |f|
   = f.input :date, :placeholder => "訂單日期", |
-    :input_html=>{ :data =>{ :behaviour=>"datepicker"}}
+    :input_html=>{ :data =>{ :behaviour=>"datepicker"} }
 
-/ = form_tag root_path, :method => :get, remote: true do
+
+  = f.input :branch_name, :label => "館別", | 
+    :collection => Branch.pluck(:name) , |
+    :include_blank => false
+
+  = f.submit "Seaarch" , :target => '_blank'
+
+
+%h1 歷史表單
+
 
 
 - if @orders
@@ -26,13 +35,13 @@
 %table.table.table-striped
   %tr
     / %th Sn
-    %th Date
+    %th 交易時間
     %th 負責
     / %th Book
-    %th Original amount
-    %th Actual amount
-    %th Buyer
-    %th Role
+    %th 原始價格
+    %th 折扣後價格
+    %th 客戶
+    %th 等級
     %th 詳細資訊
     / %th
     / %th
@@ -45,7 +54,8 @@
       %td= order.actual_amount
       %td= get_customer_name(order.customer_id)      
       %td= order.role
-      %td= link_to 'Show', order
+      %td= link_to '詳細資訊', order, :class=> "btn btn-info ", | 
+      :target => '_blank'
       / %td= link_to 'Edit', edit_order_path(order)
       / %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
