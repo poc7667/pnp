@@ -19,6 +19,7 @@ namespace :import do
       book = Book.all.sample
       while book.order_id != nil
         book = Book.all.sample
+        p "get a new random book"
       end
       return book if book.order_id == nil 
     end
@@ -38,7 +39,7 @@ namespace :import do
       books << get_sample_book()
      end
 
-     create_date = time_rand(1.month.ago)
+     create_date = time_rand(1.week.ago)
      order = Order.new(customer_id: customer.id,
                        role: customer.role,
                        created_at: create_date

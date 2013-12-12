@@ -1,17 +1,33 @@
 %p#notice= notice
 
-%h3 Original amount
-= @order.original_amount
-%h3 Actual amount
-= @order.actual_amount
-%h3 Role
-= @order.role
-%h3 Book List
-- @order.books.each do |book|
-  = book.name
-  = book.price
-  = book.sale_type
-  %br
+%table.table.table-striped
+  %tr
+    / %th Sn
+    %th 客戶
+    %th 當時身分
+    %th 原始價格
+    / %th Book
+    %th 折扣價格
+  %tr
+    %td= @order.customer.name
+    %td= @order.role
+    %td= @order.original_amount
+    %td= @order.actual_amount
+
+%table.table.table-striped
+  %tr
+    / %th Sn
+    %th 書名
+    %th 原始價格
+    / %th Book
+    %th 可否折扣
+
+  - @order.books.each do |book|
+    %tr
+      %td= book.name
+      %td= book.price
+      %td= book.sale_type
+      %br
 
 
-=link_to 'Back', orders_path
+/ # =link_to 'Back', orders_path

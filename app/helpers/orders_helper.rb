@@ -10,8 +10,8 @@ module OrdersHelper
             # if order_id
     end
 
-    def show_recent_ten_days() 
-      return Date.today.downto(Date.today - 9.days)
+    def show_recent_days( period ) 
+      return Date.today.downto(Date.today - period.to_i.days)
     end
 
 end

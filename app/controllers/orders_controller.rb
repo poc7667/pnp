@@ -1,6 +1,9 @@
+# encoding: utf-8
 class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
+  require 'date'
+  require 'pry'
   def index
 
     @orders = Order.paginate(:page => params[:page],
@@ -27,6 +30,22 @@ class OrdersController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @order }
     end
+  end
+
+  
+  def show_by_date
+    
+    branch_name = params[:order][:branch_name]
+    branch = Branch.find_by_name(branch_name).id
+    order_date = Date.strptime(params[:order][:date], "%m/%d/%Y").midnight
+    @orders = Order.by_day_branch(order_date, branch )
+
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @order }
+    end
+
   end
 
   # GET /orders/new

@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   ROLES = %w[admin manager staff customer banned] 
 
   has_many :orders 
+  has_many :role_records
   belongs_to :branch 
         
   # Include default devise modules. Others available are:
