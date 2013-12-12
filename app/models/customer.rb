@@ -53,9 +53,7 @@ class Customer < ActiveRecord::Base
                         :user_id => order.user.id,
                         role: self.role 
                         )
-      binding.pry
       order.upgrade = role_record.id
-      binding.pry
       order.save()
       self.role_records << role_record
       self.save()    

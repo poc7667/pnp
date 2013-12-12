@@ -77,11 +77,6 @@ class Order < ActiveRecord::Base
             .where(" created_at >= ?",
              1.year.ago)
             .all
-    # points = orders.inject(0) do |sum, order |
-    #   break if order.upgrade != nil      
-    #   break sum unless order.upgrade.nil?  
-    #   sum += order.actual_amount if order.actual_amount
-    # end
 
     points = orders.inject(0) do |sum, order |
       break sum unless order.upgrade.nil?      

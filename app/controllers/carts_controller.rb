@@ -149,8 +149,14 @@ class CartsController < ApplicationController
         if @customer.name == :GUEST.to_s
           # binding.pry
           amount = @order.actual_amount
-          flash[:notice] = '可加入VIP' if amount  > Order::THRESHOULD[:VIP]
-          flash[:notice] = '可加入白金會員' if amount > Order::THRESHOULD[:PLATINUM]
+          flash[:notice] = "#{@customer.name} 新增消費 #{amount} "
+          
+          if amount > Order::THRESHOULD[:PLATINUM]
+            flash[:notice] += '可加入白金會員' 
+          elsif amount  > Order::THRESHOULD[:VIP]
+            flash[:notice] += '可加入VIP'               
+          end
+
         else
           flash[:notice] = "#{@customer.name} 新增消費 $#{@order.actual_amount} "
         end

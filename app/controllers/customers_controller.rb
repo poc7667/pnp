@@ -49,7 +49,6 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     @customer.expire_date = (1.year.from_now.midnight + 1.day).to_date
-    binding.pry
 
     respond_to do |format|
       if @customer.save

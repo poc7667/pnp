@@ -1,16 +1,15 @@
 / = render 'recent'
-%h5 Search
-= simple_form_for :order, :url => '/order/show_by_date' do |f|
+%h2.center Search
+= simple_form_for :order, :url => '/order/show_by_date', :class => "form-inline" do |f|
+  .div{:class =>"form-group"}
+    = f.input :date, :placeholder => "訂單日期", |
+      :input_html=>{ :data =>{ :behaviour=>"datepicker"} }
 
-  = f.input :date, :placeholder => "訂單日期", |
-    :input_html=>{ :data =>{ :behaviour=>"datepicker"} }
-
-
-  = f.input :branch_name, :label => "館別", | 
-    :collection => Branch.pluck(:name) , |
-    :include_blank => false
-
-  = f.submit "Search" , :target => '_blank'
+    = f.input :branch_name, :label => "館別", | 
+      :collection => Branch.pluck(:name) , |
+      :include_blank => false
+    
+    = f.button :submit ,"查詢"
 
 %h1 Recent
 - Branch.all.each do | branch |
