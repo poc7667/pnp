@@ -33,22 +33,15 @@ class OrdersController < ApplicationController
   
   def show_by_date
     
-    ap(params)
     branch_name = params[:order][:branch_name]
     branch = Branch.find_by_name(branch_name).id
-    order_date = Date.strptime(params[:order][:date], "%m/%d/%Y").midnight + 1.day
-
-    orders = Order.by_day_branch(order_date,
-      branch 
-      )
-    ap orders
+    order_date = Date.strptime(params[:order][:date], "%m/%d/%Y").midnight
+    @orders = Order.by_day_branch(order_date, branch )
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @order }
     end
-
-    binding.pry
 
   end
 

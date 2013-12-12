@@ -39,3 +39,4 @@ pickle-email-*.html
 #for store secret file
 config/application.yml
 solr/data
+.DS_Store

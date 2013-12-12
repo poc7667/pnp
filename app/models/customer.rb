@@ -31,6 +31,7 @@ class Customer < ActiveRecord::Base
 
   def upgrade_role(action, order)
     #展期永遠從今天開始算
+    binding.pry
     self.expire_date = 1.year.from_now.to_date.to_s
     self.role = :VIP.to_s if :join_vip == action
     self.role = :PLATINUM.to_s if :join_platinum == action
@@ -40,15 +41,22 @@ class Customer < ActiveRecord::Base
     if RoleRecord.where(
      :customer_id => self.id,
      :role =>  self.role ,
-     :order_id => order.id
+     :order_id => order.id,
+     :user_id => order.user.id
+
      ).count == 0
 
       role_record = RoleRecord.create(
                         customer_id: self.id ,
                         order_id: order.id,
                         expire_date: self.expire_date,
+                        :user_id => order.user.id,
                         role: self.role 
                         )
+      binding.pry
+      order.upgrade = role_record.id
+      binding.pry
+      order.save()
       self.role_records << role_record
       self.save()    
 

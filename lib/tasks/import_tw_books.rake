@@ -5,7 +5,7 @@ namespace :import do
   task :tw_books => :environment do
 
     require "faker"
-    real_sn = 23011
+    real_sn = 32711
 
     1.upto(3).each do
       File.open("lib/tasks/tw_books.txt", "r").each do |line|

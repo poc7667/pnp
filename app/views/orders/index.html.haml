@@ -1,13 +1,5 @@
 / = render 'recent'
-
-- show_recent_ten_days.each do | day |
-  = day
-  = Order.by_day_branch(day, 0)
-  = Order.by_day_branch(day, 1)
-  %br/
-
-
-%h2 Search
+%h5 Search
 = simple_form_for :order, :url => '/order/show_by_date' do |f|
 
   = f.input :date, :placeholder => "訂單日期", |
@@ -18,12 +10,29 @@
     :collection => Branch.pluck(:name) , |
     :include_blank => false
 
-  = f.submit "Seaarch" , :target => '_blank'
+  = f.submit "Search" , :target => '_blank'
+
+%h1 Recent
+- Branch.all.each do | branch |
+  %h2 Branch #{branch.name}
+  %table.table.table-striped
+    %tr
+      %th Date
+      / %th Number of Orders
+      %th Amount
+      / %th Detail
+    - show_recent_days(3).each do | day |
+      %tr
+        %td= day
+        /%td= Order.by_day_branch(day, branch.id).length
+        %td= Order.sum(Order.by_day_branch(day, branch.id))
+        / %td
+        /   -Order.by_day_branch(day, branch.id).each  do | order |
+        /     = order.created_at
+        /     %br/
 
 
 %h1 歷史表單
-
-
 
 - if @orders
   = will_paginate @orders, |

@@ -128,7 +128,8 @@ class CartsController < ApplicationController
     @customer = session[:load_customer] || Customer.get_guest
     # books_in_cart = .values
     @order = Order.new(customer_id: @customer.id,
-                       role: @customer.role)
+                       role: @customer.role,
+                       user_id: current_user.id)
 
     @books = get_submitted_books_price(@customer,
                                        @order,
@@ -150,7 +151,10 @@ class CartsController < ApplicationController
           amount = @order.actual_amount
           flash[:notice] = '可加入VIP' if amount  > Order::THRESHOULD[:VIP]
           flash[:notice] = '可加入白金會員' if amount > Order::THRESHOULD[:PLATINUM]
+        else
+          flash[:notice] = "#{@customer.name} 新增消費 $#{@order.actual_amount} "
         end
+
         format.html { render 'index' }
       else
         flash[:errors] = "請重新登入,再執行一次"

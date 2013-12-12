@@ -1,2 +1,21 @@
-%h1 HIHI
-
+%h1 Recent Orders $ #{@orders.inject(0) {|sum, i| sum + i.actual_amount} } 
+%h3 
+%table.table.table-striped
+  %tr
+    %th 交易時間
+    %th 負責
+    %th 原始價格
+    %th 折扣後價格
+    %th 客戶
+    %th 等級
+    %th 詳細資訊
+  - @orders.each do | order |
+    %tr
+      %td= order.created_at.strftime("%Y-%m-%d %H:%M")
+      %td= get_user_name(order.user_id)
+      %td= order.original_amount
+      %td= order.actual_amount
+      %td= get_customer_name(order.customer_id)      
+      %td= order.role
+      %td= link_to '詳細資訊', order, :class=> "btn btn-info ", | 
+      :target => '_blank'

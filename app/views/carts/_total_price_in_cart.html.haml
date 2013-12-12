@@ -1,14 +1,17 @@
 %div#total_price
 
-  %table#total_price_table.table{ style: 'display: none;' }
+  %table.table.table-striped#total_price_table.table{ style: 'display: none;' }
     %tr
-      %th Before
-      %th After
+      %th 折扣前總金額
+      %th 折扣後總金額
     %tr
       %td 
         #total_original
       %td 
         #total_discounted
+    %tr
+      %td 實收金額
+      %td 應找金額        
     %tr
       %td 
         #if_user_pay_in_thounsand
