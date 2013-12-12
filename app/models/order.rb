@@ -7,11 +7,13 @@ class Order < ActiveRecord::Base
                   :role, 
                   :sn, 
                   :customer_id,
+                  :user_id,
                   :created_at
   after_save :check_upgrade,:update_books, :sunspot_commit_reindex
   # has_many :line_items
   # has_many :books, :through => :line_items
   has_many :books
+  has_many :role_records
   belongs_to :customer 
   belongs_to :user 
 
@@ -32,7 +34,13 @@ class Order < ActiveRecord::Base
   end
 
   def self.by_day_branch( day_end, branch)
-    day_start = day_end - 1.day
+    
+    day_start = day_end.midnight
+    day_end = day_start + 1.day
+
+    # day_start = Date.strptime(day_start, "%m/%d/%Y").midnight
+    # day_end = day_start + 1.day
+
     ap [day_end, day_start]
     orders = self.where(["created_at >= ? AND created_at <= ?",
                 day_start,
@@ -42,6 +50,7 @@ class Order < ActiveRecord::Base
       order.user.branch_id == branch
     }
     ap orders_by_branch.count
+    # binding.pry
     return orders_by_branch
   end
 
@@ -68,13 +77,19 @@ class Order < ActiveRecord::Base
             .where(" created_at >= ?",
              1.year.ago)
             .all
-    
+
     points = orders.inject(0) do |sum, order |
-      break if order.upgrade != nil      
-      sum += order.actual_amount if order.actual_amount
+      break sum unless order.upgrade.nil?      
+      sum += order.actual_amount || 0
     end
 
+    points =0 if nil == points
+    if nil == points
+      points = 0
+      binding.pry
+    end
 
+    return points
   end
 
   def check_upgrade(in_customer=nil)
@@ -94,13 +109,16 @@ class Order < ActiveRecord::Base
     if [:general.to_s.upcase] == role
       if points >= THRESHOULD[:VIP] #500
         customer.upgrade_role(:join_vip, self)
+        ap("Enter General upgrade")
       end
     end
 
     # APPLY FOR ALL KIND OF CUSTOMER
     if points >= THRESHOULD[:PLATINUM] #20,000
+        ap("Enter PLATINUM upgrade")
       customer.upgrade_role(:join_platinum, self)
     end
+    # binding.pry
 
   end
 

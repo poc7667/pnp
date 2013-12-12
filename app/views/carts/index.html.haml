@@ -1,5 +1,5 @@
 #current_amount  
-%h1 結帳系統
+/ %h1 結帳系統
 
 
 %div#loaded_customer.customer{ style: 'display: none;' }
@@ -19,15 +19,14 @@
 /add by sn
 = form_tag cart_add_item_path, :id=> 'add_item_to_cart', :method => :get, remote: true do
   %p
-    = text_field_tag :query, params[:query], :placeholder => "Serial Number"
-    = text_field_tag :price, params[:price], :placeholder => "Price"
+    = text_field_tag :query, params[:query], :placeholder => "輸入書籍序號"
+    = text_field_tag :price, params[:price], :placeholder => "輸入價格,掃描價格"
     = submit_tag "新增書籍"
 
 
 %div
   = form_tag cart_submit_order_path, :id=> 'submit_orders_for', :method => :get  do
     #loaded_customer_id{ style: 'display: none;' }
-    = render 'total_price_in_cart'
     #carts{ style: 'display: none;' }
       %table#checkout_table.table{ style: 'display: none;' }
         %tr
@@ -35,8 +34,11 @@
           %th 原價
           %th 折扣後
           %th 種類
-          %th function
+          %th 功能
+      = render 'total_price_in_cart'
+
       = submit_tag "新增訂單", :class=> "btn btn-primary "
+
 
 #search_div{ style: 'display: none;' }
   %table#books_tbl.table

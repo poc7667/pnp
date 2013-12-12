@@ -94,3 +94,10 @@ gem 'bootstrap-datepicker-rails'
 
 
 gem 'rubyzip'
+
+#gem "resque"
+#gem 'resque_mailer'
+#gem 'resque-scheduler'
+
+
+gem 'whenever', :require => false

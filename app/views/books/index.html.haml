@@ -7,9 +7,10 @@
 %ul
   - @book.errors.full_messages.each do |msg|
     %li= msg
-%h2
-  = link_to "HELP 使用說明", root_path(), :class => "btn btn-primary books"
-/ = render 'form'
+
+%div.center
+  = link_to "新增客戶資料", new_book_path, |
+   :class=> "btn btn-primary btn-xlarge"
 %p
 = form_tag book_search_path, :method => :get, remote: true do
   %p
