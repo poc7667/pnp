@@ -1,3 +1,9 @@
+- [:notice, :error, :alert].each do |level|
+  - unless params[level].blank?
+    %div{class: "alert-message #{flash_class(level)}"}
+      %a.close{href: "#"} ×
+      = content_tag :p, params[level]
+
 #current_amount  
 / %h1 結帳系統
 
@@ -25,7 +31,7 @@
 
 
 %div
-  = form_tag cart_submit_order_path, :id=> 'submit_orders_for', :method => :get  do
+  = form_tag cart_submit_order_path, :id=> 'submit_orders_for', :method => :post  do
     #loaded_customer_id{ style: 'display: none;' }
     #carts{ style: 'display: none;' }
       %table#checkout_table.table{ style: 'display: none;' }

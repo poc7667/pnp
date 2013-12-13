@@ -1,9 +1,12 @@
+require 'pry'
 desc "Import translates."
 
 namespace :import do
     task :books => :environment do
 
       require "faker"
+      puts $:
+          binding.pry
       real_sn = 1000000000
       File.open("./books.txt", "r").each do |line|
         author = Faker::Lorem.words(2..5).join(' ').gsub('-','').gsub('\s+','\s')

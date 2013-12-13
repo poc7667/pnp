@@ -24,7 +24,8 @@ BookStore::Application.routes.draw do
   get "cart/search_customer" => "carts#search_customer"
   get "cart/add_item" => "carts#add_item"
   get "cart/load_customer" => "carts#load_customer"
-  get "cart/submit_order" => "carts#submit_order"
+  post "cart/submit_order" => "carts#submit_order"
+  # get "cart/submit_order" => "carts#submit_order"
   
 
   post "order/show_by_date" => "orders#show_by_date"

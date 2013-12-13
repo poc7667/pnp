@@ -20,16 +20,9 @@ class Book < ActiveRecord::Base
   # has_one :orders, :through => :line_items
   belongs_to :order 
 
-  before_destroy :ensure_not_referenced_by_any_line_item
+  # before_destroy :ensure_not_referenced_by_any_line_item
 
-  def ensure_not_referenced_by_any_line_item
-    if line_items.count.zero?
-      return true
-    else
-      error[:base] << "Line Items has something you can not delete"
-      return false
-    end
-  end
+
 
   def self.search_by_sn(key)
     if key

@@ -10,7 +10,6 @@ class CartsController < ApplicationController
   # GET /carts
   # GET /carts.json
   def index
-
     @carts = Cart.all
     # @q = Book.search(params[:q])
     init_session()
@@ -145,26 +144,30 @@ class CartsController < ApplicationController
         @customer.save
         #TODO: Customer VIP points 累計
 
+        #CLEAR the params
+        params.delete :book_ids
+        params.delete :commit
         #Show Notice Message if GUEST's spend > 500
         if @customer.name == :GUEST.to_s
           # binding.pry
           amount = @order.actual_amount
-          flash[:notice] = "#{@customer.name} 新增消費 #{amount} "
+          notice = "#{@customer.name} 新增消費 #{amount} "
           
           if amount > Order::THRESHOULD[:PLATINUM]
-            flash[:notice] += '可加入白金會員' 
+            notice += '可加入白金會員' 
           elsif amount  > Order::THRESHOULD[:VIP]
-            flash[:notice] += '可加入VIP'               
+            notice += '可加入VIP'               
           end
 
         else
           flash[:notice] = "#{@customer.name} 新增消費 $#{@order.actual_amount} "
         end
 
-        format.html { render 'index' }
+
+        format.html { redirect_to action: "index", :notice=> notice }
       else
-        flash[:errors] = "請重新登入,再執行一次"
-        format.html { render 'index' }
+        errors = "請重新登入,再執行一次"
+        format.html { redirect_to action: "index"  , :notice => errors }
       end
 
       format.json { render json: @cart }
