@@ -14,6 +14,8 @@ class Order < ActiveRecord::Base
   # has_many :books, :through => :line_items
   has_many :books
   has_many :role_records
+  validates  :original_amount,:customer_id,:user_id, :presence => true
+  
   belongs_to :customer 
   belongs_to :user 
 
@@ -86,7 +88,6 @@ class Order < ActiveRecord::Base
     points =0 if nil == points
     if nil == points
       points = 0
-      binding.pry
     end
 
     return points
@@ -115,7 +116,7 @@ class Order < ActiveRecord::Base
 
     # APPLY FOR ALL KIND OF CUSTOMER
     if points >= THRESHOULD[:PLATINUM] #20,000
-        ap("Enter PLATINUM upgrade")
+      ap("Enter PLATINUM upgrade")
       customer.upgrade_role(:join_platinum, self)
     end
     # binding.pry

@@ -1,24 +1,24 @@
 %header{:class => "navbar navbar-fixed-top navbar-inverse"}
     %div{:class => "navbar-inner"}
         %div{:class => "container"}
-        =link_to  "BOOK", root_path, id: "logo"
+        =link_to  "古今書廊管理系統", root_path, id: "logo"
         %div{:class=>"nav"}       
             %ul{:class=> "nav pull-left"}
                 - if current_user.blank? 
                     %li     
-                        =link_to( "Sign Up" ,new_user_registration_path)                    
+                        =link_to( "註冊" ,new_user_registration_path)                    
                     %li
-                        =link_to( "Login", new_user_session_path )
+                        =link_to( "登入", new_user_session_path )
                 - else
                     %li
                         -if current_user.name.blank?
                             =link_to( current_user.email, root_path)
                         -else
-                            =link_to( "Hi! "+current_user.name, root_path)
+                            =link_to( "您好 "+current_user.name, root_path)
                     %li
-                        =link_to("Logout",destroy_user_session_path, :method => :delete )
+                        =link_to("登出",destroy_user_session_path, :method => :delete )
                 %li 
-                    =mail_to "poc.hsu@vivotek.com","Contact us" 
+                    =mail_to "mgaga1001@gmail.com","Contact us" 
             
     %div{:class => 'navbar'}
         %div{:class => 'navbar-inner'}

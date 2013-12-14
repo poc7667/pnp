@@ -3,7 +3,7 @@
 / %p#msg_p
 / #form_error.alert
 
-%h1 Add
+%h1 書籍列表
 %ul
   - @book.errors.full_messages.each do |msg|
     %li= msg
@@ -19,19 +19,19 @@
   = will_paginate @existed_books, :previous_label => '上頁', :next_label => '下頁',:page_links => true , :id => 'all_books_pagination'
 
 %table#found_books_table.table
-  %th id
-  %th title
+  / %th id
+  %th 書名
   %th ISBN
-  %th sn
-  %th price
-  %th author
-  %th sale_type
-  %th category
+  %th 入庫序號
+  %th 價格
+  %th 作者
+  %th 銷售種類
+  / %th category
   / %th release_date
   / %th location
   / %th comment
 
-  %th Functions
+  %th 功能
 
   #books.books
     = render @existed_books

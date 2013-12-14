@@ -28,6 +28,8 @@ namespace :import do
 
     1.step( n_order ) do | i |
 
+     user = User.first(3).sample
+
      customers = Customer.first(3)
      customer = customers.sample
      clerk = User.all.sample 
@@ -42,6 +44,7 @@ namespace :import do
      create_date = time_rand(1.week.ago)
      order = Order.new(customer_id: customer.id,
                        role: customer.role,
+                       user_id: user.id,
                        created_at: create_date
                       )
      

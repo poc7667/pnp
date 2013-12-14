@@ -1,0 +1,21 @@
+/ https://github.com/matthewrobertson/ERB-Sublime-Snippets
+= simple_form_for(@book, :html => { :class => "form-horizontal"}) do |f|
+  / http://stackoverflow.com/questions/10776429/make-all-input-fields-on-the-same-line
+  - if @book.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@book.errors.count, "error")
+        prohibited this book from being saved:
+      %ul
+        - @book.errors.full_messages.each do |msg|
+          %li= msg
+  = f.input :name , label: "書名", as: :string
+  = f.input :isbn , label: "isbn".upcase, :as => :string
+  = f.input :price , label: "價格".upcase, :as => :string
+  = f.input :sn , label: "序號".upcase, :as => :string
+  = f.input :author , label: "作者".upcase, :as => :string
+  = f.input :sale_type , label: "折扣".upcase, :as => :select, |
+  :collection => Book::TYPE_TITLE.sort.map {|k,v| [v,k]} , |
+  :selected => 1
+  / = f.input :category , label: "類型".upcase, :as => :string
+  = f.submit '新增', :id=> 'add_book_btn', :class => "btn btn-primary books"

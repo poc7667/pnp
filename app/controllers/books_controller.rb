@@ -79,7 +79,7 @@ class BooksController < ApplicationController
     respond_to do |format|
 
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'successfully created.' }
         format.json { render json: @book, status: :created, location: @book }
         # format.js
       else

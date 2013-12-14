@@ -31,11 +31,11 @@ class Customer < ActiveRecord::Base
 
   def upgrade_role(action, order)
     #展期永遠從今天開始算
-    binding.pry
     self.expire_date = 1.year.from_now.to_date.to_s
     self.role = :VIP.to_s if :join_vip == action
     self.role = :PLATINUM.to_s if :join_platinum == action
-
+    ap(order)
+    ap(self)
     # binding.pry
     # Skip the duplicated
     if RoleRecord.where(

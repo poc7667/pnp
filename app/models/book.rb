@@ -3,6 +3,7 @@ class Book < ActiveRecord::Base
   attr_accessible :name, :isbn ,:price ,:comment ,:author ,:sale_type ,:publisher ,:sn ,:category
   attr_accessible :location, :category, :release_date
   validates_uniqueness_of :sn
+  validates  :price,:sn,:name, :presence => true
   include ApplicationHelper
 
   after_save :sunspot_commit_reindex

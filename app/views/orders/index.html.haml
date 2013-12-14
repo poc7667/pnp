@@ -11,59 +11,52 @@
     
     = f.button :submit ,"查詢"
 
-%h1 Recent
+%h1 近期訂單
 - Branch.all.each do | branch |
-  %h2 Branch #{branch.name}
+  %h3 #{branch.name}
   %table.table.table-striped
     %tr
-      %th Date
-      / %th Number of Orders
-      %th Amount
-      / %th Detail
-    - show_recent_days(3).each do | day |
+      %th 日期
+      %th 銷售額
+    - show_recent_days(2).each do | day |
       %tr
         %td= day
-        /%td= Order.by_day_branch(day, branch.id).length
         %td= Order.sum(Order.by_day_branch(day, branch.id))
-        / %td
-        /   -Order.by_day_branch(day, branch.id).each  do | order |
-        /     = order.created_at
-        /     %br/
 
 
-%h1 歷史表單
+-if @orders.length > 0
 
-- if @orders
+  %h1 歷史表單
   = will_paginate @orders, |
     :previous_label => '上頁', |
     :next_label => '下頁', |
     :page_links => true , |
     :id => 'all_orders_pagination'
 
-%table.table.table-striped
-  %tr
-    / %th Sn
-    %th 交易時間
-    %th 負責
-    / %th Book
-    %th 原始價格
-    %th 折扣後價格
-    %th 客戶
-    %th 等級
-    %th 詳細資訊
-    / %th
-    / %th
-  - @orders.each do |order|
+  %table.table.table-striped
     %tr
-      / %td= order.sn
-      %td= order.created_at.strftime("%Y-%m-%d %H:%M")
-      %td= get_user_name(order.user_id)
-      %td= order.original_amount
-      %td= order.actual_amount
-      %td= get_customer_name(order.customer_id)      
-      %td= order.role
-      %td= link_to '詳細資訊', order, :class=> "btn btn-info ", | 
-      :target => '_blank'
-      / %td= link_to 'Edit', edit_order_path(order)
-      / %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+      / %th Sn
+      %th 交易時間
+      %th 負責
+      / %th Book
+      %th 原始價格
+      %th 折扣後價格
+      %th 客戶
+      %th 等級
+      %th 詳細資訊
+      / %th
+      / %th
+    - @orders.each do |order|
+      %tr
+        / %td= order.sn
+        %td= order.created_at.strftime("%Y-%m-%d %H:%M")
+        %td= get_user_name(order.user_id)
+        %td= order.original_amount
+        %td= order.actual_amount
+        %td= get_customer_name(order.customer_id)      
+        %td= order.role
+        %td= link_to '詳細資訊', order, :class=> "btn btn-info ", | 
+        :target => '_blank'
+        / %td= link_to 'Edit', edit_order_path(order)
+        / %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+  %br/
