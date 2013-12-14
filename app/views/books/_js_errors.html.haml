@@ -1,0 +1,7 @@
+- target.errors.full_messages.each do |error|
+  var errors = $('
+  %ul
+    ');
+    errors.append('
+    %li>= escape_javascript( error )
+    ');

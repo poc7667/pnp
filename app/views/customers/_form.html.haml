@@ -1,16 +1,15 @@
 = simple_form_for(@customer) do |f|
   = f.error_notification
   .form-inputs
-    = f.input :name, as: :string
+    = f.input :name,label:"姓名", as: :string
     = f.input :email, as: :email
-    = f.input :phone, as: :tel
-    = f.input :indoor_phone, as: :tel
-    = f.input :role, as: :select, |
+    = f.input :phone,label:"手機", as: :tel
+    = f.input :indoor_phone,label:"室內電話", as: :tel
+    = f.input :role,label: "等級",as: :select, |
      :collection => Customer::ROLES, |
       :selected => 1
     / = f.input :expire_date, :input_html => { :value => 1.year.from_now, :class => 'uneditable-input' } , |
     / disabled: true, as: :string
-    = f.input :address, as: :string
-    = f.input :comment, :input_html => { :cols => 50, :rows => 3 }
-  .form-actions
-    = f.button :submit
+    = f.input :address,label:"地址", as: :string
+    = f.input :comment,label: "備註",:input_html => { :cols => 50, :rows => 3 }
+    = f.button :submit, "新增"

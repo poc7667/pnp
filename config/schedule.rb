@@ -32,8 +32,6 @@ every :reboot do
 end 
 
 every 1.minute do
-  command "cd #{DROPBOX_DIR} ; pg_dump pnpbook_development -U ar8 > `date +%Y-%m-%H\ %k:%M:%S`_pnpbook_development.dump "
-  command "cd #{DROPBOX_DIR} ; pg_dump pnpbook_production -U ar8 > `date +%Y-%m-%H\ %k:%M:%S`_pnpbook_production.dump "
-  把這兩行拿去獨立script 放在裡面做就好
+  command "cd #{DROPBOX_DIR} ; python backup_postgres.py "
 end
 

@@ -1,0 +1,11 @@
+= simple_form_for(@order) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :sn
+    / <haml:loud> f.input :user_id </haml:loud>
+    / <haml:loud> f.input :book_id </haml:loud>
+    = f.input :original_amount
+    = f.input :actual_amount
+    = f.input :role
+  .form-actions
+    = f.button :submit
