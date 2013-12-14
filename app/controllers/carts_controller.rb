@@ -160,7 +160,7 @@ class CartsController < ApplicationController
           end
 
         else
-          flash[:notice] = "#{@customer.name} 新增消費 $#{@order.actual_amount} "
+          notice = "#{@customer.name} 新增消費 $#{@order.actual_amount} "
         end
 
 
