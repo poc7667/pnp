@@ -8,13 +8,11 @@
   - @book.errors.full_messages.each do |msg|
     %li= msg
 
-%div.center
-  = link_to "新增客戶資料", new_book_path, |
-   :class=> "btn btn-primary btn-xlarge"
 %p
 = form_tag book_search_path, :method => :get, remote: true do
   %p
-    = text_field_tag :query, params[:query], :placeholder => "BKName, Author, ISBN"
+    = text_field_tag :query, params[:query], | 
+    :placeholder => "書名, 作者, ISBN"
     = submit_tag "搜尋"
 
 - if @existed_books
