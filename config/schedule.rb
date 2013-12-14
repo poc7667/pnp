@@ -19,22 +19,21 @@
 
 # Learn more: http://github.com/javan/whenever
 
-RAILS_ROOT = "/Users/hsu-wei-cheng/Dropbox/Rails/zeus"
+RAILS_ROOT = "/home/ar8/pnp"
+DROPBOX_DIR = "/home/ar8/Dropbox"
+
 
 every :reboot do  
 
-  command "echo `date` >> \"whenever_reboot.txt\""
+  command "cd #{DROPBOX_DIR} ; echo `date` >> \"whenever_reboot.txt\""
   command "cd  #{RAILS_ROOT}"
-  command "pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
-  command "rake sunspot:solr:start"
-  command "redis-server /usr/local/etc/redis.conf" # Check if Ubuntu OK?
-  
-  # command "rake resque:work QUEUE='*'"
-  # command "rake resque_schedule:setup"
-  # command "rake resque:scheduler"
-  command "resque-web"
-
-  command "god -c #{RAILS_ROOT}/lib/god/resque.god"
-
+  command "cd  #{RAILS_ROOT} ; rake sunspot:solr:start"
 
 end 
+
+every 1.minute do
+  command "cd #{DROPBOX_DIR} ; pg_dump pnpbook_development -U ar8 > `date +%Y-%m-%H\ %k:%M:%S`_pnpbook_development.dump "
+  command "cd #{DROPBOX_DIR} ; pg_dump pnpbook_production -U ar8 > `date +%Y-%m-%H\ %k:%M:%S`_pnpbook_production.dump "
+  把這兩行拿去獨立script 放在裡面做就好
+end
+

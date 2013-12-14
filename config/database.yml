@@ -9,7 +9,7 @@ development:
   host: localhost  
   pool: 5
   timeout: 5000
-  username: poc 
+  username: ar8 
   password: 13
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,7 @@ production:
   host: localhost
   pool: 5
   timeout: 5000
-  username: poc
+  username: ar8
   password: 13
 
 
