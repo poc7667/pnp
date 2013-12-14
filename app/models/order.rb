@@ -107,7 +107,9 @@ class Order < ActiveRecord::Base
       points: points
     }
 
-    if [:general.to_s.upcase] == role
+
+
+    if :general.to_s.upcase == role
       if points >= THRESHOULD[:VIP] #500
         customer.upgrade_role(:join_vip, self)
         ap("Enter General upgrade")

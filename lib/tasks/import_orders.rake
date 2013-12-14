@@ -30,7 +30,7 @@ namespace :import do
 
      user = User.first(3).sample
 
-     customers = Customer.first(3)
+     customers = Customer.first(30)
      customer = customers.sample
      clerk = User.all.sample 
      n_books = Random.rand(2) 
@@ -38,10 +38,13 @@ namespace :import do
 
      ap "Books #{n_books}"
      0.step( n_books ) do |i| 
-      books << get_sample_book()
+      bk = get_sample_book()
+      books << bk
+      books = books.uniq
      end
 
-     create_date = time_rand(1.week.ago)
+     create_date = time_rand(2.day.ago)
+     # create_date = time_rand(2.week.ago)
      order = Order.new(customer_id: customer.id,
                        role: customer.role,
                        user_id: user.id,

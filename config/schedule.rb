@@ -31,7 +31,7 @@ every :reboot do
 
 end 
 
-every 1.minute do
+every 6.hour do
   command "cd #{DROPBOX_DIR} ; python backup_postgres.py "
 end
 
